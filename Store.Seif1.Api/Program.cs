@@ -1,12 +1,14 @@
 
+using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Persistence;
 using Persistence.Data;
 
 namespace Store.Seif1.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +24,14 @@ namespace Store.Seif1.Api
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            var app = builder.Build();
+            builder.Services.AddScoped<IDbInitializer , DbInitializer>(); //Allow Di For DbInitialize
 
+            var app = builder.Build();
+            #region
+            using var scope = app.Services.CreateScope();
+            var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>(); //ASk ClR from  DbInitializer 
+            await  dbInitializer.InitializeAsync();
+            #endregion
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
