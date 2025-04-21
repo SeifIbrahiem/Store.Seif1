@@ -3,6 +3,9 @@ using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.Data;
+using Services;
+using Services.Abstractions;
+using AssemblyMapping = Services.AssemblyReference;
 
 namespace Store.Seif1.Api
 {
@@ -25,6 +28,11 @@ namespace Store.Seif1.Api
             });
 
             builder.Services.AddScoped<IDbInitializer , DbInitializer>(); //Allow Di For DbInitialize
+
+            builder.Services.AddScoped<IUnitOfWork , UnitOfWork>();
+            builder.Services.AddAutoMapper(typeof(AssemblyMapping).Assembly);
+            builder.Services.AddScoped<IServiceManager, ServiceManager>();
+
 
             var app = builder.Build();
             #region
