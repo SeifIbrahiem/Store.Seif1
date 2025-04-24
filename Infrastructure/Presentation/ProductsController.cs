@@ -17,9 +17,9 @@ namespace Presentation
 
         [HttpGet] //Get : /api/products
 
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts(int?brandId ,int?typeId)
         {
-            var result = await serviceManager.ProductService.GetAllProductAsync();
+            var result = await serviceManager.ProductService.GetAllProductAsync(brandId,typeId);
             if (result is null) return BadRequest(); //400
             return Ok(result); //200
 
