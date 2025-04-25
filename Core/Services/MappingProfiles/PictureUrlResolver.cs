@@ -16,6 +16,7 @@ namespace Services.MappingProfiles
         {
             if (string.IsNullOrEmpty(source.PictureUrl)) return string.Empty;
             return $"{configuration["BaseUrl"]}/{source.PictureUrl}";
+
         }
     }
 }
