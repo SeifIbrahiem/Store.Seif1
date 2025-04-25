@@ -53,6 +53,7 @@ namespace Store.Seif1.Api
 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
 
             app.MapControllers();
 
