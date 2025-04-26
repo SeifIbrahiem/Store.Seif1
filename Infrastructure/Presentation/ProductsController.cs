@@ -35,7 +35,7 @@ namespace Presentation
             return Ok(result); //200
 
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] //Get: / api/ products/12
         public async Task<IActionResult> GetProductsById(int id) //Get : /api /product/12
         {
             var result = await serviceManager.ProductService.GetProductByIdAsync(id);
@@ -50,6 +50,7 @@ namespace Presentation
             return Ok(result); //200
         }
 
+
         [HttpGet("types")] //Get: / api/ products/types
         public async Task<IActionResult> GetAllTypes()
         {
@@ -57,5 +58,6 @@ namespace Presentation
             if (result is null) return BadRequest(); //400
             return Ok(result); //200
         }
+
     }
 }
