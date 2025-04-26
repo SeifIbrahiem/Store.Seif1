@@ -18,7 +18,7 @@ namespace Shared
         public string? Search { get; set; }
 
         private int _PageIndex = 1;
-        private int _PageSize = 5;
+        private int _PageSize = 18;
 
         public int PageSize
         {
